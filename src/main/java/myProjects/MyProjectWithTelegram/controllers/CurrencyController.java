@@ -1,7 +1,7 @@
-package Controllers;
+package myProjects.MyProjectWithTelegram.controllers;
 
-import DTO.ValuteCursOnDate;
-import Service.CentralRussianBankService;
+import myProjects.MyProjectWithTelegram.dto.ValuteCursOnDate;
+import myProjects.MyProjectWithTelegram.service.CentralRussianBankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

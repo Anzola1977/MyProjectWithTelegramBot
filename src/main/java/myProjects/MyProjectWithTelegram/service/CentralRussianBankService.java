@@ -1,8 +1,8 @@
-package Service;
+package myProjects.MyProjectWithTelegram.service;
 
-import DTO.GetCursOnDateXml;
-import DTO.GetCursOnDateXmlResponse;
-import DTO.ValuteCursOnDate;
+import myProjects.MyProjectWithTelegram.dto.GetCursOnDateXml;
+import myProjects.MyProjectWithTelegram.dto.GetCursOnDateXmlResponse;
+import myProjects.MyProjectWithTelegram.dto.ValuteCursOnDate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
@@ -31,7 +31,7 @@ public class CentralRussianBankService extends WebServiceTemplate {
         GetCursOnDateXmlResponse response = (GetCursOnDateXmlResponse) marshalSendAndReceive(cbrApiUrl, getCursOnDateXML);
 
         if (response == null) {
-            throw new IllegalStateException("Could not get response from CBR Service");
+            throw new IllegalStateException("Could not get response from CBR service");
         }
 
         final List<ValuteCursOnDate> courses = response.getGetCursOnDateXmlResult().getValuteData();

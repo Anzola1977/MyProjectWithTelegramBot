@@ -1,10 +1,10 @@
-package Config;
+package myProjects.MyProjectWithTelegram.config;
 
-import DTO.GetCursOnDateXml;
-import DTO.GetCursOnDateXmlResponse;
-import DTO.GetCursOnDateXmlResult;
-import DTO.ValuteCursOnDate;
-import Service.CentralRussianBankService;
+import myProjects.MyProjectWithTelegram.dto.GetCursOnDateXml;
+import myProjects.MyProjectWithTelegram.dto.GetCursOnDateXmlResponse;
+import myProjects.MyProjectWithTelegram.dto.GetCursOnDateXmlResult;
+import myProjects.MyProjectWithTelegram.dto.ValuteCursOnDate;
+import myProjects.MyProjectWithTelegram.service.CentralRussianBankService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
