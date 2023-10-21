@@ -21,15 +21,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-//import static myProjects.MyProjectWithTelegram.service.FinanceService.ADD_INCOME;
-//import static myProjects.MyProjectWithTelegram.service.FinanceService.ADD_SPEND;
-
 @Service //Данный класс является сервисом
 @Slf4j //Подключаем логирование из Lombok'a
 @RequiredArgsConstructor
-//@Component
+
 public class BotService extends TelegramLongPollingBot {
-    private Map<Long, List<String>> previousCommands = new ConcurrentHashMap<>();
+    private final Map<Long, List<String>> previousCommands = new ConcurrentHashMap<>();
     private final CentralRussianBankService centralRussianBankService;
     private final ActiveChatRepository activeChatRepository;
     private final FinanceService financeService;
@@ -37,12 +34,13 @@ public class BotService extends TelegramLongPollingBot {
     private static final String ADD_INCOME = "/addincome";
     private static final String ADD_SPEND = "/addspend";
 
-
-    @Value("${bot.api.key}") //Сюда будет вставлено значение из application.properties, в котором будет указан api key, полученный от BotFather
+    @Value("${bot.api.key}")
+    //Сюда будет вставлено значение из application.properties, в котором будет указан api key, полученный от BotFather
     private String apiKey;
 
     @Value("${bot.name}") //Как будут звать нашего бота
     private String name;
+
     //Это основной метод, который связан с обработкой сообщений
     @Override
     public void onUpdateReceived(Update update) {
@@ -51,7 +49,6 @@ public class BotService extends TelegramLongPollingBot {
             SendMessage response = new SendMessage(); //Данный класс представляет собой реализацию команды отправки сообщения, которую за нас выполнит ранее подключенная библиотека
             Long chatId = message.getChatId(); //ID чата, в который необходимо отправить ответ
             response.setChatId(String.valueOf(chatId)); //Устанавливаем ID, полученный из предыдущего этап сюда, чтобы сообщить, в какой чат необходимо отправить сообщение
-
             //Тут начинается самое интересное - мы сравниваем, что прислал пользователь, и какие команды мы можем обработать. Пока что у нас только одна команда
             if (CURRENT_RATES.equalsIgnoreCase(message.getText())) {
 //Получаем все курсы валют на текущий момент и проходимся по ним в цикле
@@ -67,7 +64,6 @@ public class BotService extends TelegramLongPollingBot {
             } else {
                 response.setText(financeService.addFinanceOperation(getPreviousCommand(message.getChatId()), message.getText(), message.getChatId()));
             }
-
             putPreviousCommand(message.getChatId(), message.getText());
             //Теперь мы сообщаем, что пора бы и ответ отправлять
             execute(response);
@@ -79,7 +75,7 @@ public class BotService extends TelegramLongPollingBot {
             }
             //Ниже очень примитивная обработка исключений, чуть позже мы это поправим
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Возникла проблема при получении данных от сервисов ЦБ РФ", e);
         }
     }
 
@@ -97,6 +93,7 @@ public class BotService extends TelegramLongPollingBot {
         return previousCommands.get(chatId)
                 .get(previousCommands.get(chatId).size() - 1);
     }
+
     public void sendNotificationToAllActiveChats(String message, Set<Long> chatIds) {
         for (Long id : chatIds) {
             SendMessage sendMessage = new SendMessage();
@@ -105,7 +102,7 @@ public class BotService extends TelegramLongPollingBot {
             try {
                 execute(sendMessage);
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                log.error("Возникла проблема при получении данных от сервисов ЦБ РФ", e);
             }
         }
     }
@@ -121,6 +118,7 @@ public class BotService extends TelegramLongPollingBot {
     public String getBotUsername() {
         return name;
     }
+
     //Данный метод возвращает API ключ для взаимодействия с Telegram
     @Override
     public String getBotToken() {
