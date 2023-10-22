@@ -17,7 +17,6 @@ public class FinanceService {
     private final IncomeRepository incomeRepository;
     private final SpendRepository spendRepository;
 
-
     public String addFinanceOperation(String operationType, String price, Long chatId) {
         String message = "";
         if (ADD_INCOME.equalsIgnoreCase(operationType)) {

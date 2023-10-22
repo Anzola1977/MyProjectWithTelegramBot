@@ -1,12 +1,12 @@
 package myProjects.MyProjectWithTelegram.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import myProjects.MyProjectWithTelegram.dto.ValuteCursOnDate;
 import myProjects.MyProjectWithTelegram.entity.ActiveChat;
 import myProjects.MyProjectWithTelegram.repository.ActiveChatRepository;
-
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class ScheduleService {
 
@@ -40,7 +41,7 @@ public class ScheduleService {
                 previousRates.addAll(currentRates);
             }
         } catch (DatatypeConfigurationException e) {
-            e.printStackTrace();
+            log.error("Возникла проблема при получении данных от сервисов ЦБ РФ", e);
         }
     }
 }
