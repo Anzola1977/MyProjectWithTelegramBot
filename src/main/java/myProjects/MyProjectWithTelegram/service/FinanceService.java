@@ -1,11 +1,11 @@
 package myProjects.MyProjectWithTelegram.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import myProjects.MyProjectWithTelegram.entity.Income;
 import myProjects.MyProjectWithTelegram.entity.Spend;
 import myProjects.MyProjectWithTelegram.repository.IncomeRepository;
 import myProjects.MyProjectWithTelegram.repository.SpendRepository;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 

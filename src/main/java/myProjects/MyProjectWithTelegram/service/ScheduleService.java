@@ -2,11 +2,11 @@ package myProjects.MyProjectWithTelegram.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import myProjects.MyProjectWithTelegram.dto.ValuteCursOnDate;
 import myProjects.MyProjectWithTelegram.entity.ActiveChat;
 import myProjects.MyProjectWithTelegram.repository.ActiveChatRepository;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import java.util.ArrayList;
