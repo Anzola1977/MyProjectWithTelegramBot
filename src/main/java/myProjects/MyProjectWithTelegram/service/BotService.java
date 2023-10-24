@@ -1,10 +1,10 @@
 package myProjects.MyProjectWithTelegram.service;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import myProjects.MyProjectWithTelegram.dto.ValuteCursOnDate;
 import myProjects.MyProjectWithTelegram.entity.ActiveChat;
 import myProjects.MyProjectWithTelegram.repository.ActiveChatRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

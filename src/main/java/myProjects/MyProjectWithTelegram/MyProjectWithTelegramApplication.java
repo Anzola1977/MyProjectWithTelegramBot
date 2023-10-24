@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class MyProjectWithTelegramApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MyProjectWithTelegramApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MyProjectWithTelegramApplication.class, args);
+    }
 
 }
